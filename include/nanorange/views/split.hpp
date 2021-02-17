@@ -215,21 +215,33 @@ private:
             return !(x == y);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(const outer_iterator& x, default_sentinel_t)
         {
             return x.done();
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(default_sentinel_t d, const outer_iterator& x)
         {
             return x == d;
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(const outer_iterator& x, default_sentinel_t d)
         {
             return !(x == d);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(default_sentinel_t d, const outer_iterator& x)
         {
             return !(x == d);
@@ -322,26 +334,41 @@ private:
             return !(x == y);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(const inner_iterator& x, default_sentinel_t)
         {
             return x.done();
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(default_sentinel_t d, const inner_iterator& x)
         {
             return x == d;
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(const inner_iterator& x, default_sentinel_t d)
         {
             return !(x == d);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(default_sentinel_t d, const inner_iterator& x)
         {
             return !(x == d);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr decltype(auto) iter_move(const inner_iterator& i)
             noexcept(noexcept(ranges::iter_move(i.get_outer_current())))
         {

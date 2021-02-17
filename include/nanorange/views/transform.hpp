@@ -206,6 +206,10 @@ private:
             return x.current_ - y.current_;
         }
 
+        // Make these friend functions templates to keep MSVC happy
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr decltype(auto) iter_move(const iterator& i)
             noexcept(iter_move_noexcept_helper)
         {
@@ -253,21 +257,34 @@ private:
 
         constexpr sentinel_t<Base> base() { return end_; }
 
+        // Make these friend functions templates to keep MSVC happy
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(const iterator<Const>& x, const sentinel& y)
         {
             return x.base() == y.end_;
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator==(const sentinel& x, const iterator<Const>& y)
         {
             return x.end_ == y.base();
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(const iterator<Const>& x, const sentinel& y)
         {
             return !(x == y);
         }
 
+#if (defined(_MSC_VER) && _MSC_VER < 1922)
+        template <typename = void>
+#endif
         friend constexpr bool operator!=(const sentinel& x, const iterator<Const>& y)
         {
             return !(x == y);
